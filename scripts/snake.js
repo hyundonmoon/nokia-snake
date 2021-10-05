@@ -1,21 +1,14 @@
 import { getNextDirection } from './input.js';
 import { overlap } from './utils.js';
 
-// array of objects containing coordinates for each snake body part
-// first object is the head
-export const SNAKE = [{ x: 11, y: 11 }];
+let SNAKE = [{ x: 11, y: 11 }];
 
-// return coordinates for the snake head
 export function getSnakeHead() {
   return SNAKE[0];
 }
 
-// adds new parts to the end of the SNAKE array
-// the new parts will appear one by one as the snake moves
-export function extendSnake(num) {
-  for (let i = 0; i < num; i++) {
-    SNAKE.push({ ...SNAKE[SNAKE.length - 1] });
-  }
+export function extendSnake() {
+  SNAKE.push({ ...SNAKE[SNAKE.length - 1] });
 }
 
 // checks if snake head overlaps with its body
@@ -34,8 +27,6 @@ export function overlapsSnake(coords) {
 }
 
 export function drawSnake(gameboard) {
-  // without line 39, previous snake parts will stil be there at the next render
-  // (i.e., the snake won't move, it'll just get longer)
   gameboard.innerHTML = '';
   SNAKE.forEach((part) => {
     const partElement = document.createElement('div');
@@ -54,4 +45,8 @@ export function updateSnake() {
 
   SNAKE[0].x += getNextDirection().x;
   SNAKE[0].y += getNextDirection().y;
+}
+
+export function resetSnake() {
+  SNAKE = [{ x: 11, y: 11 }];
 }

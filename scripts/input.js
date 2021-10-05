@@ -1,6 +1,6 @@
 let nextDirection = { x: 0, y: 0 };
 
-window.addEventListener('keydown', (e) => {
+export function updateDirection(e) {
   switch (e.key) {
     case 'ArrowUp': {
       if (nextDirection.y !== 0) return;
@@ -26,8 +26,12 @@ window.addEventListener('keydown', (e) => {
       break;
     }
   }
-});
+}
 
-export const getNextDirection = () => {
+export function getNextDirection() {
   return nextDirection;
-};
+}
+
+export function resetDirection() {
+  nextDirection = { x: 0, y: 0 };
+}

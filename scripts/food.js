@@ -1,16 +1,15 @@
 import { overlapsSnake, getSnakeHead, extendSnake } from './snake.js';
 import { randomGridPosition, overlap } from './utils.js';
-import { extendSnakeBy } from './settings.js';
 
 let foodCoords = randomGridPosition();
 
-const getRandomFoodPosition = () => {
-  let newFoodPosition;
-  while (newFoodPosition == null || overlapsSnake(newFoodPosition)) {
-    newFoodPosition = randomGridPosition();
+function getRandomFoodPosition() {
+  let newFoodCoords;
+  while (newFoodCoords == null || overlapsSnake(newFoodCoords)) {
+    newFoodCoords = randomGridPosition();
   }
-  return newFoodPosition;
-};
+  return newFoodCoords;
+}
 
 function ateFood(foodCoords) {
   return overlap(getSnakeHead(), foodCoords);
@@ -19,7 +18,7 @@ function ateFood(foodCoords) {
 export function updateFood(score) {
   if (ateFood(foodCoords)) {
     score.push('score!');
-    extendSnake(extendSnakeBy);
+    extendSnake();
     foodCoords = getRandomFoodPosition();
   }
 }
@@ -30,4 +29,8 @@ export function drawFood(gameboard) {
   foodElement.style.gridColumnStart = foodCoords.x;
   foodElement.classList.add('food');
   gameboard.appendChild(foodElement);
+}
+
+export function resetFood() {
+  foodCoords = getRandomFoodPosition();
 }

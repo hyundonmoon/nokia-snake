@@ -4,12 +4,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="styles.css" rel="stylesheet" />
-    <title>Nokia 3330 Snake Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./styles/main.css" rel="stylesheet" />
+    <link href="./styles/snake.css" rel="stylesheet" />
+    <link href="./styles/food.css" rel="stylesheet" />
+    <title>SNAKE</title>
   </head>
   <body>
-    <div id="scoreboard"></div>
-    <div id="gameboard"></div>
-    <script src="main.js" defer type="module"></script>
+    <div class="initial-screen">
+      <h1 class="game-title">SNAKE</h1>
+      <form class="input-menu">
+        <label for="speed-input" class="speed-input-label"
+          >Choose game speed (10 ~ 20)</label
+        >
+        <input
+          type="number"
+          placeholder="Game speed"
+          min="10"
+          max="20"
+          id="speed-input"
+          class="speed-input"
+        />
+        <button class="game-start-btn">Go!</button>
+      </form>
+    </div>
+    <div class="game-screen hidden">
+      <div id="scoreboard"></div>
+      <div id="gameboard"></div>
+    </div>
+    <script src="./scripts/main.js" defer type="module"></script>
   </body>
 </html>

@@ -1,0 +1,9 @@
+.snake {
+  border-radius: 0.5rem;
+  background-image: linear-gradient(to left, #00c853, #b2ff59);
+  border: rgb(7, 172, 7) 2px solid;
+}
+
+.snake:first-child {
+  transform: rotate(45deg);
+}

@@ -1,5 +1,5 @@
-import { getNextDirection } from './input.js';
-import { overlap } from './utils.js';
+import { getNextDirection } from "./input.js";
+import { overlap } from "./utils.js";
 
 let SNAKE = [{ x: 11, y: 11 }];
 
@@ -27,12 +27,12 @@ export function overlapsSnake(coords) {
 }
 
 export function drawSnake(gameboard) {
-  gameboard.innerHTML = '';
+  gameboard.innerHTML = "";
   SNAKE.forEach((part) => {
-    const partElement = document.createElement('div');
+    const partElement = document.createElement("div");
     partElement.style.gridRowStart = part.y;
     partElement.style.gridColumnStart = part.x;
-    partElement.classList.add('snake');
+    partElement.classList.add("snake");
     gameboard.appendChild(partElement);
   });
 }

@@ -1,5 +1,5 @@
-import { updateSnake, drawSnake } from './snake.js';
-import { updateFood, drawFood } from './food.js';
+import { updateSnake, drawSnake } from "./snake.js";
+import { updateFood, drawFood } from "./food.js";
 
 export function update(score) {
   updateSnake();

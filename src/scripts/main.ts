@@ -7,9 +7,9 @@ import { updateDirection, resetDirection } from "./input.js";
 const initialScreen: HTMLDivElement =
   document.querySelector(".initial-screen")!;
 const gameScreen: HTMLDivElement = document.querySelector(".game-screen")!;
-const inputMenu: HTMLFormElement = document.querySelector(".input-menu")!;
+const gameMenuFormElement: HTMLFormElement =
+  document.querySelector(".game-menu")!;
 const speedInput: HTMLInputElement = document.querySelector("#speed-input")!;
-// const gameStartBtn = document.querySelector(".game-start-btn");
 const gameboard: HTMLDivElement = document.querySelector("#gameboard")!;
 const scoreboard: HTMLDivElement = document.querySelector("#scoreboard")!;
 
@@ -19,23 +19,15 @@ let requestAnimationFrameId: number;
 let score: string[] = [];
 let gameSpeed: number;
 
-inputMenu.addEventListener("submit", (e) => {
+gameMenuFormElement.addEventListener("submit", (e) => {
   e.preventDefault();
-  startGame();
+  const formData = new FormData(gameMenuFormElement);
+  const speed = formData.get("speed") as string;
+  startGame(parseInt(speed, 10));
 });
 
-function startGame() {
-  const gameSpeedInput = parseInt(speedInput.value);
-
-  if (
-    typeof gameSpeedInput === "number" &&
-    gameSpeedInput >= 10 &&
-    gameSpeedInput <= 20
-  ) {
-    gameSpeed = gameSpeedInput;
-  } else {
-    gameSpeed = 15;
-  }
+function startGame(speed: number) {
+  gameSpeed = speed;
 
   initialScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");

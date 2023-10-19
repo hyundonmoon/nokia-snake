@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Gemunu Libre', sans-serif;
+  font-family: "Gemunu Libre", sans-serif;
 }
 
 body {
@@ -30,19 +30,21 @@ body {
   margin-bottom: 1rem;
 }
 
-.speed-input-label {
-  display: block;
-  text-align: center;
+.speed-menu__label {
+  margin-bottom: 1rem;
   font-size: 1.25rem;
 }
 
-.speed-input {
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  outline: none;
+.speed-menu__options {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.speed-menu__option {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   font-size: 1.25rem;
 }
 

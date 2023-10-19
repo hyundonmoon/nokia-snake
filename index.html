@@ -23,25 +23,35 @@
   <body>
     <div class="initial-screen">
       <h1 class="game-title">SNAKE</h1>
-      <form class="input-menu">
-        <label for="speed-input" class="speed-input-label"
-          >Choose game speed (10 ~ 20)</label
-        >
-        <input
-          type="number"
-          placeholder="Game speed"
-          min="10"
-          max="20"
-          id="speed-input"
-          class="speed-input"
-        />
+      <form class="game-menu">
+        <div class="speed-menu">
+          <p class="speed-menu__label">Choose game speed:</p>
+          <div class="speed-menu__options">
+            <div class="speed-menu__option">
+              <input checked name="speed" id="easy" value="10" type="radio" />
+              <label for="easy">Easy</label>
+            </div>
+
+            <div class="speed-menu__option">
+              <input name="speed" id="medium" value="15" type="radio" />
+              <label for="medium">Medium</label>
+            </div>
+
+            <div class="speed-menu__option">
+              <input name="speed" id="difficult" value="20" type="radio" />
+              <label for="difficult">Difficult</label>
+            </div>
+          </div>
+        </div>
         <button class="game-start-btn">Go!</button>
       </form>
     </div>
+
     <div class="game-screen hidden">
       <div id="scoreboard"></div>
       <div id="gameboard"></div>
     </div>
+
     <script src="./dist/scripts/main.js" defer type="module"></script>
   </body>
 </html>

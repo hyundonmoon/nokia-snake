@@ -1,0 +1,32 @@
+{
+  "name": "nokia-snake",
+  "version": "1.0.0",
+  "description": "Snake game I built for my friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "format": "npx prettier --write 'src/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts' --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyundonmoon/nokia-snake.git"
+  },
+  "keywords": [],
+  "author": "Hyun Don Moon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyundonmoon/nokia-snake/issues"
+  },
+  "homepage": "https://github.com/hyundonmoon/nokia-snake#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}

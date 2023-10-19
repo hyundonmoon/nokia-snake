@@ -1,9 +1,10 @@
-import { getNextDirection } from './input.js';
-import { overlap } from './utils.js';
+import { Coordinates } from "../types.js";
+import { getNextDirection } from "./input.js";
+import { overlap } from "./utils.js";
 
-let SNAKE = [{ x: 11, y: 11 }];
+let SNAKE: Coordinates[] = [{ x: 11, y: 11 }];
 
-export function getSnakeHead() {
+export function getSnakeHead(): Coordinates {
   return SNAKE[0];
 }
 
@@ -26,13 +27,13 @@ export function overlapsSnake(coords) {
   return SNAKE.some((part) => overlap(part, coords));
 }
 
-export function drawSnake(gameboard) {
-  gameboard.innerHTML = '';
+export function drawSnake(gameboard: HTMLDivElement) {
+  gameboard.innerHTML = "";
   SNAKE.forEach((part) => {
-    const partElement = document.createElement('div');
-    partElement.style.gridRowStart = part.y;
-    partElement.style.gridColumnStart = part.x;
-    partElement.classList.add('snake');
+    const partElement = document.createElement("div");
+    partElement.style.gridRowStart = part.y.toString();
+    partElement.style.gridColumnStart = part.x.toString();
+    partElement.classList.add("snake");
     gameboard.appendChild(partElement);
   });
 }

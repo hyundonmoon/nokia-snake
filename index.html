@@ -24,25 +24,63 @@
     <div class="initial-screen">
       <h1 class="game-title">SNAKE</h1>
       <form class="game-menu">
-        <div class="speed-menu">
-          <p class="speed-menu__label">Choose game speed:</p>
-          <div class="speed-menu__options">
-            <div class="speed-menu__option">
-              <input checked name="speed" id="easy" value="10" type="radio" />
-              <label for="easy">Easy</label>
+        <div class="form-field">
+          <p class="menu__label">Choose game speed:</p>
+          <div class="menu__options">
+            <div class="menu__option">
+              <input
+                checked
+                name="speed"
+                id="speed-easy"
+                value="10"
+                type="radio"
+              />
+              <label for="speed-easy">Easy</label>
             </div>
 
-            <div class="speed-menu__option">
-              <input name="speed" id="medium" value="15" type="radio" />
-              <label for="medium">Medium</label>
+            <div class="menu__option">
+              <input name="speed" id="speed-medium" value="15" type="radio" />
+              <label for="speed-medium">Medium</label>
             </div>
 
-            <div class="speed-menu__option">
-              <input name="speed" id="difficult" value="20" type="radio" />
-              <label for="difficult">Difficult</label>
+            <div class="menu__option">
+              <input
+                name="speed"
+                id="speed-difficult"
+                value="20"
+                type="radio"
+              />
+              <label for="speed-difficult">Difficult</label>
             </div>
           </div>
         </div>
+
+        <div class="form-field">
+          <p class="menu__label">Choose game mode:</p>
+          <div class="menu__options">
+            <div class="menu__option">
+              <input
+                checked
+                name="mode"
+                id="mode-easy"
+                value="easy"
+                type="radio"
+              />
+              <label for="mode-easy">Easy</label>
+            </div>
+
+            <div class="menu__option">
+              <input
+                name="mode"
+                id="mode-difficult"
+                value="difficult"
+                type="radio"
+              />
+              <label for="mode-difficult">Difficult</label>
+            </div>
+          </div>
+        </div>
+
         <button class="game-start-btn">Go!</button>
       </form>
     </div>

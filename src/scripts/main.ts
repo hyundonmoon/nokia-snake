@@ -3,13 +3,13 @@ import { outsideGrid } from "./utils.js";
 import { ateItself, getSnakeHead, resetSnake } from "./snake.js";
 import { resetFood } from "./food.js";
 import { updateDirection, resetDirection } from "./input.js";
+import { Mode } from "../types.js";
 
 const initialScreen: HTMLDivElement =
   document.querySelector(".initial-screen")!;
 const gameScreen: HTMLDivElement = document.querySelector(".game-screen")!;
 const gameMenuFormElement: HTMLFormElement =
   document.querySelector(".game-menu")!;
-const speedInput: HTMLInputElement = document.querySelector("#speed-input")!;
 const gameboard: HTMLDivElement = document.querySelector("#gameboard")!;
 const scoreboard: HTMLDivElement = document.querySelector("#scoreboard")!;
 
@@ -18,16 +18,19 @@ let prevTimeStamp = 0;
 let requestAnimationFrameId: number;
 let score: string[] = [];
 let gameSpeed: number;
+let gameMode: Mode;
 
 gameMenuFormElement.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(gameMenuFormElement);
   const speed = formData.get("speed") as string;
-  startGame(parseInt(speed, 10));
+  const mode = formData.get("mode") as Mode;
+  startGame(parseInt(speed, 10), mode);
 });
 
-function startGame(speed: number) {
+function startGame(speed: number, mode: Mode) {
   gameSpeed = speed;
+  gameMode = mode;
 
   initialScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
@@ -71,7 +74,11 @@ function gameLoop(timeStamp: number) {
 }
 
 function checkDeath() {
-  gameOver = outsideGrid(getSnakeHead()) || ateItself();
+  if (gameMode === "easy") {
+    gameOver = ateItself();
+  } else if (gameMode === "difficult") {
+    gameOver = outsideGrid(getSnakeHead()) || ateItself();
+  }
 }
 
 function updateScore() {

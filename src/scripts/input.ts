@@ -1,6 +1,8 @@
-let nextDirection = { x: 0, y: 0 };
+import { Coordinates } from "../types";
 
-export function updateDirection(e) {
+let nextDirection: Coordinates = { x: 0, y: 0 };
+
+export function updateDirection(e: KeyboardEvent) {
   switch (e.key) {
     case "ArrowUp": {
       if (nextDirection.y !== 0) return;
@@ -28,7 +30,7 @@ export function updateDirection(e) {
   }
 }
 
-export function getNextDirection() {
+export function getNextDirection(): Coordinates {
   return nextDirection;
 }
 

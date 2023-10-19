@@ -4,19 +4,20 @@ import { ateItself, getSnakeHead, resetSnake } from "./snake.js";
 import { resetFood } from "./food.js";
 import { updateDirection, resetDirection } from "./input.js";
 
-const initialScreen = document.querySelector(".initial-screen");
-const gameScreen = document.querySelector(".game-screen");
-const inputMenu = document.querySelector(".input-menu");
-const speedInput = document.querySelector("#speed-input");
-const gameStartBtn = document.querySelector(".game-start-btn");
-const gameboard = document.querySelector("#gameboard");
-const scoreboard = document.querySelector("#scoreboard");
+const initialScreen: HTMLDivElement =
+  document.querySelector(".initial-screen")!;
+const gameScreen: HTMLDivElement = document.querySelector(".game-screen")!;
+const inputMenu: HTMLFormElement = document.querySelector(".input-menu")!;
+const speedInput: HTMLInputElement = document.querySelector("#speed-input")!;
+// const gameStartBtn = document.querySelector(".game-start-btn");
+const gameboard: HTMLDivElement = document.querySelector("#gameboard")!;
+const scoreboard: HTMLDivElement = document.querySelector("#scoreboard")!;
 
 let gameOver = false;
 let prevTimeStamp = 0;
-let requestAnimationFrameId;
-let score = [];
-let gameSpeed;
+let requestAnimationFrameId: number;
+let score: string[] = [];
+let gameSpeed: number;
 
 inputMenu.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -48,7 +49,7 @@ function resetGame() {
   initialScreen.classList.remove("hidden");
   gameScreen.classList.add("hidden");
   gameboard.innerHTML = "";
-  gameSpeed = null;
+  gameSpeed = 0;
   gameOver = false;
   score = [];
   resetSnake();
@@ -58,13 +59,13 @@ function resetGame() {
   window.cancelAnimationFrame(requestAnimationFrameId);
 }
 
-function gameLoop(timeStamp) {
+function gameLoop(timeStamp: number) {
   if (gameOver) {
     alert(`Your final score is: ${score.length}`);
     return resetGame();
   }
 
-  window.requestAnimationFrame(gameLoop);
+  requestAnimationFrameId = window.requestAnimationFrame(gameLoop);
 
   const elapsedTime = (timeStamp - prevTimeStamp) / 1000;
   if (elapsedTime < 1 / gameSpeed) return;

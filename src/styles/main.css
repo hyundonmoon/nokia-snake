@@ -29,6 +29,11 @@ body {
   margin-top: 1rem;
 }
 
+.form-field:not(:has(+ .form-field)) {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid currentColor;
+}
+
 .game-title {
   padding-bottom: 1rem;
   font-size: 2rem;

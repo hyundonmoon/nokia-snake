@@ -1,9 +1,35 @@
 .snake {
-  border-radius: 0.5rem;
-  background-image: linear-gradient(to left, #00c853, #b2ff59);
-  border: rgb(7, 172, 7) 2px solid;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
-.snake:first-child {
-  transform: rotate(45deg);
+.head::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+}
+
+.head.up::before {
+  transform: rotate(45deg) translate(-50%, -50%);
+}
+
+.head.down::before {
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+.head.left::before {
+  transform: rotate(45deg) translate(-50%, 50%);
+}
+
+.head.right::before {
+  transform: rotate(45deg) translate(50%, -50%);
+}
+
+.snake:not(.head) {
+  border: 1px solid #ccc;
 }

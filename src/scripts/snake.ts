@@ -1,5 +1,8 @@
 import { Coordinates, Mode } from "../types.js";
-import { getNextDirection } from "./input.js";
+import {
+  getNextDirectionAsCoordinates,
+  getNextDirectionAsString,
+} from "./input.js";
 import { GRID_SIZE, overlap } from "./utils.js";
 
 let SNAKE: Coordinates[] = [{ x: 11, y: 11 }];
@@ -29,11 +32,18 @@ export function overlapsSnake(coords) {
 
 export function drawSnake(gameboard: HTMLDivElement) {
   gameboard.replaceChildren();
-  SNAKE.forEach((part) => {
+  SNAKE.forEach((part, index) => {
     const partElement = document.createElement("div");
     partElement.style.gridRowStart = part.y.toString();
     partElement.style.gridColumnStart = part.x.toString();
     partElement.classList.add("snake");
+    const direction = getNextDirectionAsString();
+    partElement.classList.add(direction);
+
+    if (index === 0) {
+      partElement.classList.add("head");
+    }
+
     gameboard.appendChild(partElement);
   });
 }
@@ -50,8 +60,10 @@ function getNewSnakeHeadCoordinates(
   currentHead: Coordinates,
   mode: Mode,
 ): Coordinates {
-  let newSnakeHeadXCoordinate = currentHead.x + getNextDirection().x;
-  let newSnakeHeadYCoordinate = currentHead.y + getNextDirection().y;
+  let newSnakeHeadXCoordinate =
+    currentHead.x + getNextDirectionAsCoordinates().x;
+  let newSnakeHeadYCoordinate =
+    currentHead.y + getNextDirectionAsCoordinates().y;
 
   if (mode === "difficult") {
     return { x: newSnakeHeadXCoordinate, y: newSnakeHeadYCoordinate };

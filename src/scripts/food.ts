@@ -31,9 +31,36 @@ export function drawFood(gameboard: HTMLDivElement) {
   foodElement.style.gridRowStart = foodCoords.y.toString();
   foodElement.style.gridColumnStart = foodCoords.x.toString();
   foodElement.classList.add("food");
+  foodElement.innerText = "🍎";
+
+  const columnWidth = Math.floor(gameboard.clientWidth / 21);
+  foodElement.style.fontSize = `${
+    Number.isNaN(columnWidth) ? 16 : columnWidth
+  }px`;
+  foodElement.style.lineHeight = `${
+    Number.isNaN(columnWidth) ? 16 : columnWidth
+  }px`;
+
   gameboard.appendChild(foodElement);
 }
 
 export function resetFood() {
   foodCoords = getRandomFoodPosition();
+}
+
+export function updateFoodSize() {
+  const gameboard = document.querySelector("#gameboard") as HTMLDivElement;
+  const foodElement = document.querySelector(".food") as HTMLDivElement;
+
+  if (!gameboard || !foodElement) {
+    return;
+  }
+
+  const columnWidth = Math.floor(gameboard.clientWidth / 21);
+  foodElement.style.fontSize = `${
+    Number.isNaN(columnWidth) ? 16 : columnWidth
+  }px`;
+  foodElement.style.lineHeight = `${
+    Number.isNaN(columnWidth) ? 16 : columnWidth
+  }px`;
 }

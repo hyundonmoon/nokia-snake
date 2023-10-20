@@ -1,7 +1,7 @@
 import { update, draw } from "./game.js";
 import { outsideGrid } from "./utils.js";
 import { ateItself, getSnakeHead, resetSnake } from "./snake.js";
-import { resetFood } from "./food.js";
+import { resetFood, updateFoodSize } from "./food.js";
 import { updateDirection, resetDirection } from "./input.js";
 import { Mode } from "../types.js";
 
@@ -36,6 +36,7 @@ function startGame(speed: number, mode: Mode) {
   gameScreen.classList.remove("hidden");
 
   window.addEventListener("keydown", updateDirection);
+  window.addEventListener("resize", updateFoodSize);
 
   requestAnimationFrameId = window.requestAnimationFrame((timestamp) =>
     gameLoop(timestamp, mode),
@@ -45,14 +46,17 @@ function startGame(speed: number, mode: Mode) {
 function resetGame() {
   initialScreen.classList.remove("hidden");
   gameScreen.classList.add("hidden");
-  gameboard.innerHTML = "";
+  gameboard.replaceChildren();
   gameSpeed = 0;
   gameOver = false;
   score = [];
+
   resetSnake();
   resetFood();
   resetDirection();
+
   window.removeEventListener("keydown", updateDirection);
+  window.removeEventListener("resize", updateFoodSize);
   window.cancelAnimationFrame(requestAnimationFrameId);
 }
 

@@ -37,7 +37,9 @@ function startGame(speed: number, mode: Mode) {
 
   window.addEventListener("keydown", updateDirection);
 
-  requestAnimationFrameId = window.requestAnimationFrame(gameLoop);
+  requestAnimationFrameId = window.requestAnimationFrame((timestamp) =>
+    gameLoop(timestamp, mode),
+  );
 }
 
 function resetGame() {
@@ -54,20 +56,22 @@ function resetGame() {
   window.cancelAnimationFrame(requestAnimationFrameId);
 }
 
-function gameLoop(timeStamp: number) {
+function gameLoop(timeStamp: number, mode: Mode) {
   if (gameOver) {
     alert(`Your final score is: ${score.length}`);
     return resetGame();
   }
 
-  requestAnimationFrameId = window.requestAnimationFrame(gameLoop);
+  requestAnimationFrameId = window.requestAnimationFrame(
+    (newTimeStamp: number) => gameLoop(newTimeStamp, mode),
+  );
 
   const elapsedTime = (timeStamp - prevTimeStamp) / 1000;
   if (elapsedTime < 1 / gameSpeed) return;
 
   // only runs if enough time has elapsed
   prevTimeStamp = timeStamp;
-  update(score);
+  update(score, mode);
   updateScore();
   draw(gameboard);
   checkDeath();

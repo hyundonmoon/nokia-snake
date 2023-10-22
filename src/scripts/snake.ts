@@ -1,6 +1,9 @@
-import { Coordinates } from "../types.js";
-import { getNextDirection } from "./input.js";
-import { overlap } from "./utils.js";
+import { Coordinates, Mode } from "../types.js";
+import {
+  getNextDirectionAsCoordinates,
+  getNextDirectionAsString,
+} from "./input.js";
+import { GRID_SIZE, overlap } from "./utils.js";
 
 let SNAKE: Coordinates[] = [{ x: 11, y: 11 }];
 
@@ -28,24 +31,57 @@ export function overlapsSnake(coords) {
 }
 
 export function drawSnake(gameboard: HTMLDivElement) {
-  gameboard.innerHTML = "";
-  SNAKE.forEach((part) => {
+  gameboard.replaceChildren();
+  SNAKE.forEach((part, index) => {
     const partElement = document.createElement("div");
     partElement.style.gridRowStart = part.y.toString();
     partElement.style.gridColumnStart = part.x.toString();
     partElement.classList.add("snake");
+    const direction = getNextDirectionAsString();
+    partElement.classList.add(direction);
+
+    if (index === 0) {
+      partElement.classList.add("head");
+    }
+
     gameboard.appendChild(partElement);
   });
 }
 
 // all parts, except for the head, will take the place of its previous part
-export function updateSnake() {
-  for (let i = SNAKE.length - 2; i >= 0; i--) {
-    SNAKE[i + 1] = { ...SNAKE[i] };
+export function updateSnake(mode: Mode) {
+  SNAKE = [
+    getNewSnakeHeadCoordinates(SNAKE[0], mode),
+    ...SNAKE.slice(0, SNAKE.length - 1),
+  ];
+}
+
+function getNewSnakeHeadCoordinates(
+  currentHead: Coordinates,
+  mode: Mode,
+): Coordinates {
+  let newSnakeHeadXCoordinate =
+    currentHead.x + getNextDirectionAsCoordinates().x;
+  let newSnakeHeadYCoordinate =
+    currentHead.y + getNextDirectionAsCoordinates().y;
+
+  if (mode === "difficult") {
+    return { x: newSnakeHeadXCoordinate, y: newSnakeHeadYCoordinate };
   }
 
-  SNAKE[0].x += getNextDirection().x;
-  SNAKE[0].y += getNextDirection().y;
+  if (newSnakeHeadXCoordinate < 1) {
+    newSnakeHeadXCoordinate = GRID_SIZE;
+  } else if (newSnakeHeadXCoordinate > GRID_SIZE) {
+    newSnakeHeadXCoordinate = 1;
+  }
+
+  if (newSnakeHeadYCoordinate < 1) {
+    newSnakeHeadYCoordinate = GRID_SIZE;
+  } else if (newSnakeHeadYCoordinate > GRID_SIZE) {
+    newSnakeHeadYCoordinate = 1;
+  }
+
+  return { x: newSnakeHeadXCoordinate, y: newSnakeHeadYCoordinate };
 }
 
 export function resetSnake() {

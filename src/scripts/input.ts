@@ -1,4 +1,4 @@
-import { Coordinates } from "../types";
+import { Coordinates, Direction } from "../types";
 
 let nextDirection: Coordinates = { x: 0, y: 0 };
 
@@ -30,8 +30,28 @@ export function updateDirection(e: KeyboardEvent) {
   }
 }
 
-export function getNextDirection(): Coordinates {
+export function getNextDirectionAsCoordinates(): Coordinates {
   return nextDirection;
+}
+
+export function getNextDirectionAsString(): Direction {
+  if (nextDirection.x === 0 && nextDirection.y === -1) {
+    return "up";
+  }
+
+  if (nextDirection.x === 0 && nextDirection.y === 1) {
+    return "down";
+  }
+
+  if (nextDirection.x === -1 && nextDirection.y === 0) {
+    return "left";
+  }
+
+  if (nextDirection.x === 1 && nextDirection.y === 0) {
+    return "right";
+  }
+
+  return "up";
 }
 
 export function resetDirection() {

@@ -1,6 +1,3 @@
 .food {
-  border-radius: 0.5rem;
-  background-image: linear-gradient(to bottom right, #ff5252, #f07171);
-  border: 0.5vmin solid rgb(248, 76, 76);
-  transform: rotate(45deg);
+  position: relative;
 }

@@ -1,6 +1,6 @@
 import { Coordinates } from "../types";
 
-const GRID_SIZE = 21;
+export const GRID_SIZE = 21;
 
 export function randomGridPosition(): Coordinates {
   return {

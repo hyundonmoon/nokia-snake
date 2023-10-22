@@ -35,7 +35,6 @@ export function getNextDirectionAsCoordinates(): Coordinates {
 }
 
 export function getNextDirectionAsString(): Direction {
-  console.log("nextDicretion", nextDirection);
   if (nextDirection.x === 0 && nextDirection.y === -1) {
     return "up";
   }

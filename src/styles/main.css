@@ -18,7 +18,7 @@ body {
   color: #d6d3d1;
 }
 
-.initial-screen {
+.main {
   min-width: 50%;
   padding: 2rem 3rem;
   border-radius: 0.5rem;
@@ -34,7 +34,7 @@ body {
   border-bottom: 1px solid currentColor;
 }
 
-.game-title {
+.title {
   padding-bottom: 1rem;
   font-size: 2rem;
   text-align: center;
@@ -130,4 +130,34 @@ body {
 
 .hidden {
   display: none;
+}
+
+.game-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-detail + .game-detail {
+  margin-top: 1rem;
+}
+
+.game-detail:not(:has(+ .game-detail)) {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid currentColor;
+}
+
+.game-detail-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.game-detail-info {
+  font-size: 1.25rem;
+}
+
+.gameover-screen .buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

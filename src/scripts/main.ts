@@ -12,6 +12,12 @@ const gameMenuFormElement: HTMLFormElement =
   document.querySelector(".game-menu")!;
 const gameboard: HTMLDivElement = document.querySelector("#gameboard")!;
 const scoreboard: HTMLDivElement = document.querySelector("#scoreboard")!;
+const gameOverScreen: HTMLDivElement =
+  document.querySelector(".gameover-screen")!;
+const goBackToMainMenuButton: HTMLButtonElement =
+  document.querySelector(".main-menu-button")!;
+const playAgainButton: HTMLButtonElement =
+  document.querySelector(".play-again-button")!;
 
 let gameOver = false;
 let prevTimeStamp = 0;
@@ -25,6 +31,7 @@ gameMenuFormElement.addEventListener("submit", (e) => {
   const formData = new FormData(gameMenuFormElement);
   const speed = formData.get("speed") as string;
   const mode = formData.get("mode") as Mode;
+  initialScreen.classList.add("hidden");
   startGame(parseInt(speed, 10), mode);
 });
 
@@ -32,8 +39,7 @@ function startGame(speed: number, mode: Mode) {
   gameSpeed = speed;
   gameMode = mode;
 
-  initialScreen.classList.add("hidden");
-  gameScreen.classList.remove("hidden");
+  gameScreen.classList.toggle("hidden");
 
   window.addEventListener("keydown", updateDirection);
   window.addEventListener("resize", updateFoodSize);
@@ -44,10 +50,6 @@ function startGame(speed: number, mode: Mode) {
 }
 
 function resetGame() {
-  initialScreen.classList.remove("hidden");
-  gameScreen.classList.add("hidden");
-  gameboard.replaceChildren();
-  gameSpeed = 0;
   gameOver = false;
   score = [];
 
@@ -60,10 +62,74 @@ function resetGame() {
   window.cancelAnimationFrame(requestAnimationFrameId);
 }
 
+function showGameOverScreen(mode: Mode, score: string[] = []) {
+  const speedInfoElement: HTMLParagraphElement = gameOverScreen.querySelector(
+    ".selected-speed > .game-detail-info",
+  )!;
+  const difficultyInfoElement: HTMLParagraphElement =
+    gameOverScreen.querySelector(".selected-difficulty > .game-detail-info")!;
+  const applesEatenInfoElement: HTMLParagraphElement =
+    gameOverScreen.querySelector(".apples-eaten > .game-detail-info")!;
+
+  if (gameSpeed === 10) {
+    speedInfoElement.innerText = "Easy";
+  } else if (gameSpeed === 15) {
+    speedInfoElement.innerText = "Medium";
+  } else if (gameSpeed === 20) {
+    speedInfoElement.innerText = "Difficult";
+  }
+
+  if (mode === "easy") {
+    difficultyInfoElement.innerText = "Easy";
+  } else if (mode === "difficult") {
+    difficultyInfoElement.innerText = "Difficult";
+  }
+
+  applesEatenInfoElement.innerText = (score.length ?? 0).toString();
+
+  goBackToMainMenuButton.addEventListener("click", goBackToMainMenu);
+  playAgainButton.addEventListener("click", playAgain);
+
+  gameboard.replaceChildren();
+  gameScreen.classList.toggle("hidden");
+  gameOverScreen.classList.toggle("hidden");
+}
+
+function hideGameOverScreen() {
+  const speedInfoElement: HTMLParagraphElement = gameOverScreen.querySelector(
+    ".selected-speed > .game-detail-info",
+  )!;
+  const difficultyInfoElement: HTMLParagraphElement =
+    gameOverScreen.querySelector(".selected-difficulty > .game-detail-info")!;
+  const applesEatenInfoElement: HTMLParagraphElement =
+    gameOverScreen.querySelector(".apples-eaten > .game-detail-info")!;
+
+  speedInfoElement.innerText = "";
+  difficultyInfoElement.innerText = "";
+  applesEatenInfoElement.innerText = "";
+
+  goBackToMainMenuButton.removeEventListener("click", goBackToMainMenu);
+  playAgainButton.removeEventListener("click", playAgain);
+
+  gameOverScreen.classList.toggle("hidden");
+}
+
+function goBackToMainMenu() {
+  hideGameOverScreen();
+  initialScreen.classList.remove("hidden");
+}
+
+function playAgain() {
+  hideGameOverScreen();
+  initialScreen.classList.add("hidden");
+  startGame(gameSpeed, gameMode);
+}
+
 function gameLoop(timeStamp: number, mode: Mode) {
   if (gameOver) {
-    alert(`Your final score is: ${score.length}`);
-    return resetGame();
+    showGameOverScreen(mode, score);
+    resetGame();
+    return;
   }
 
   requestAnimationFrameId = window.requestAnimationFrame(

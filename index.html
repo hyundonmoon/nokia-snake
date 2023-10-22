@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    
+    <title>SNAKE</title>
+    <script type="module" crossorigin src="/assets/index-34827cfb.js"></script>
+    <link rel="stylesheet" href="/assets/index-16a3c979.css">
+  </head>
+  <body>
+    <div class="initial-screen main">
+      <h1 class="title">SNAKE</h1>
+      <form class="game-menu">
+        <div class="form-field">
+          <p class="menu__label">Choose game speed:</p>
+          <div class="menu__options">
+            <div class="menu__option">
+              <input
+                checked
+                name="speed"
+                id="speed-easy"
+                value="10"
+                type="radio"
+              />
+              <label for="speed-easy">Easy</label>
+            </div>
+
+            <div class="menu__option">
+              <input name="speed" id="speed-medium" value="15" type="radio" />
+              <label for="speed-medium">Medium</label>
+            </div>
+
+            <div class="menu__option">
+              <input
+                name="speed"
+                id="speed-difficult"
+                value="20"
+                type="radio"
+              />
+              <label for="speed-difficult">Difficult</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <p class="menu__label">Choose game mode:</p>
+          <div class="menu__options">
+            <div class="menu__option">
+              <input
+                checked
+                name="mode"
+                id="mode-easy"
+                value="easy"
+                type="radio"
+              />
+              <label for="mode-easy">Easy</label>
+            </div>
+
+            <div class="menu__option">
+              <input
+                name="mode"
+                id="mode-difficult"
+                value="difficult"
+                type="radio"
+              />
+              <label for="mode-difficult">Difficult</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="game-start-btn">PLAY</button>
+      </form>
+    </div>
+
+    <div class="game-screen hidden">
+      <div id="scoreboard"></div>
+      <div id="gameboard"></div>
+    </div>
+
+    <div class="gameover-screen main hidden">
+      <h1 class="title">GAME OVER</h1>
+
+      <div class="game-details">
+        <div class="game-detail selected-speed">
+          <p class="game-detail-label">Selected speed:</p>
+          <p class="game-detail-info"></p>
+        </div>
+
+        <div class="game-detail selected-difficulty">
+          <p class="game-detail-label">Selected difficulty:</p>
+          <p class="game-detail-info"></p>
+        </div>
+
+        <div class="game-detail apples-eaten">
+          <p class="game-detail-label">Apples eaten:</p>
+          <p class="game-detail-info"></p>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="game-start-btn play-again-button">Play again</button>
+        <button class="game-start-btn main-menu-button">Back to main</button>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
+    "build": "npx tsc && npx vite build",
     "build:watch": "npx tsc --watch",
     "format": "npx prettier --write 'src/**/*.ts'",
-    "lint": "eslint 'src/**/*.ts' --quiet"
+    "lint": "eslint 'src/**/*.ts' --quiet",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "dev": "vite"
   },
   "repository": {
     "type": "git",
@@ -20,14 +23,16 @@
   "bugs": {
     "url": "https://github.com/hyundonmoon/nokia-snake/issues"
   },
-  "homepage": "https://github.com/hyundonmoon/nokia-snake#readme",
+  "homepage": "https://hyundonmoon.github.io/nokia-snake",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "gh-pages": "^6.0.0",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
   }
 }

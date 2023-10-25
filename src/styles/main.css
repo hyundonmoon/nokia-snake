@@ -161,3 +161,28 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  position: absolute;
+  padding: 0.5rem;
+  width: 12rem;
+  visibility: hidden;
+  background-color: #5a5a5a;
+  border-radius: 0.25rem;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  bottom: 125%;
+}

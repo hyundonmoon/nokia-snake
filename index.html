@@ -52,7 +52,7 @@
         <div class="form-field">
           <p class="menu__label">Choose game mode:</p>
           <div class="menu__options">
-            <div class="menu__option">
+            <div class="menu__option tooltip">
               <input
                 checked
                 name="mode"
@@ -61,9 +61,12 @@
                 type="radio"
               />
               <label for="mode-easy">Easy</label>
+              <p class="tooltip-text">
+                Your snake can magically pass through walls in this mode.
+              </p>
             </div>
 
-            <div class="menu__option">
+            <div class="menu__option tooltip">
               <input
                 name="mode"
                 id="mode-difficult"
@@ -71,6 +74,9 @@
                 type="radio"
               />
               <label for="mode-difficult">Difficult</label>
+              <p class="tooltip-text">
+                Your snake dies if it runs into a wall in this mode.
+              </p>
             </div>
           </div>
         </div>

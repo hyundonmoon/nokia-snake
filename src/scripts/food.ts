@@ -1,6 +1,6 @@
 import { Coordinates } from "../types.js";
 import { overlapsSnake, getSnakeHead, extendSnake } from "./snake.js";
-import { randomGridPosition, overlap } from "./utils.js";
+import { randomGridPosition, overlap, debounce } from "./utils.js";
 
 let foodCoords = randomGridPosition();
 
@@ -48,7 +48,7 @@ export function resetFood() {
   foodCoords = getRandomFoodPosition();
 }
 
-export function updateFoodSize() {
+function updateFoodSize() {
   const gameboard = document.querySelector("#gameboard") as HTMLDivElement;
   const foodElement = document.querySelector(".food") as HTMLDivElement;
 
@@ -64,3 +64,5 @@ export function updateFoodSize() {
     Number.isNaN(columnWidth) ? 16 : columnWidth
   }px`;
 }
+
+export const debouncedUpdateFoodSize = debounce(updateFoodSize);

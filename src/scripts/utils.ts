@@ -22,3 +22,22 @@ export function outsideGrid(position): boolean {
 export function overlap(c1: Coordinates, c2: Coordinates): boolean {
   return c1.x === c2.x && c1.y === c2.y;
 }
+
+// returns a debounced function
+export function debounce(
+  fn: (...args: unknown[]) => void,
+  delay = 200,
+): (...args: unknown[]) => void {
+  let timerId: number | null = null;
+
+  return (...args: unknown[]) => {
+    if (timerId !== null) {
+      window.clearTimeout(timerId);
+      timerId = null;
+    }
+
+    timerId = window.setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
